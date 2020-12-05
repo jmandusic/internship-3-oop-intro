@@ -34,9 +34,28 @@ namespace internship_3_oop_intro
             {
                 if (item.Key.Name == eventName)
                 {
+                    var type = item.Key.EventType;
+                    var typePrint = "";
+                    switch (type)
+                    {
+                        case 1:
+                            typePrint = "Coffee";
+                            break;
+                        case 2:
+                            typePrint = "Lecture";
+                            break;
+                        case 3:
+                            typePrint = "Concert";
+                            break;
+                        case 4:
+                            typePrint = "StudySession";
+                            break;
+                        default:
+                            break;
+                    }
                     var duration = (item.Key.EndTime - item.Key.StartTime).ToString();
                     Console.WriteLine("Ime:" + ' ' + item.Key.Name);
-                    Console.WriteLine("Tip:" + ' ' + item.Key.EventType);
+                    Console.WriteLine("Tip:" + ' ' + typePrint);
                     Console.WriteLine("Start time:" + ' ' + item.Key.StartTime);
                     Console.WriteLine("End time:" + ' ' + item.Key.EndTime);
                     Console.WriteLine("Duration:" + ' ' + duration);
@@ -91,26 +110,30 @@ namespace internship_3_oop_intro
                     Menu();
                     menuDefined = true;
                 }
-                var pick = int.Parse(Console.ReadLine());
+                var pick = Console.ReadLine();
                 switch (pick)
                 {
-                    case 1:
+                    case "1":
                         Event.AddEvent(dictionary);
                         menuDefined = true;
                         break;
-                    case 2:
+                    case "2":
                         Event.DeleteEvent(dictionary);
                         menuDefined = true;
                         break;
-                    case 4:
+                    case "4":
                         Person.AddPersonToEvent(dictionary);
                         menuDefined = true;
                         break;
-                    case 5:
+                    case "3":
+                        Event.EditEvent(dictionary);
+                        menuDefined = true;
+                        break;
+                    case "5":
                         Person.RemovePersonFromEvent(dictionary);
                         menuDefined = true;
                         break;
-                    case 6:
+                    case "6":
                         var runSubMenu = true;
                         var subMenuDefined = true;
                         while (runSubMenu)
@@ -120,10 +143,10 @@ namespace internship_3_oop_intro
                                 SubMenu();
                                 subMenuDefined = true;
                             }
-                            var pickSubMenu = int.Parse(Console.ReadLine());
+                            var pickSubMenu = Console.ReadLine();
                             switch (pickSubMenu)
                             {
-                                case 1:
+                                case "1":
                                     Console.WriteLine("Izabrali ste ispis detalja o eventu");
                                     var eventDef = false;
                                     while (!eventDef)
@@ -148,7 +171,7 @@ namespace internship_3_oop_intro
                                     }
                                     subMenuDefined = true;
                                     break;
-                                case 2:
+                                case "2":
                                     Console.WriteLine("Izabrali ste ispis svih osoba na eventu");
                                     var printDef = false;
                                     while (!printDef)
@@ -173,7 +196,7 @@ namespace internship_3_oop_intro
                                     }
                                     subMenuDefined = true;
                                     break;
-                                case 3:
+                                case "3":
                                     Console.WriteLine("Izabrali ste ispis svih detalja na eventu");
                                     var printAll = false;
                                     while (!printAll)
@@ -199,7 +222,7 @@ namespace internship_3_oop_intro
                                     }
                                     subMenuDefined = true;
                                     break;
-                                case 4:
+                                case "4":
                                     Console.WriteLine("Izabrali ste izlazak iz podmenija");
                                     if (Event.PermissionToContinue())
                                     {
@@ -219,7 +242,7 @@ namespace internship_3_oop_intro
                             }
                         }
                          break;
-                    case 7:
+                    case "7":
                         Console.WriteLine("Izabrali ste izlazak iz aplikacije");
                         if (Event.PermissionToContinue())
                         {
